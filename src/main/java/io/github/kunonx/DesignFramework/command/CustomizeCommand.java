@@ -16,8 +16,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -201,8 +199,8 @@ public abstract class CustomizeCommand<C extends CustomizeCommand<C>> implements
      * <b>Changing the arbitrarily cause unexpected commands to working.</b>
      */
     private CustomizeCommand<?> parent                            = null;
-    protected void setParent(@Nonnull CustomizeCommand<?> parent) { this.parent = parent; }
-    @Nullable public CustomizeCommand<?> getParent()              { return this.parent; }
+    protected void setParent(CustomizeCommand<?> parent) { this.parent = parent; }
+    public CustomizeCommand<?> getParent()              { return this.parent; }
     public boolean isRoot()                                       { return this.parent == null; }
     public boolean hasPerent()                                    { return this.parent != null; }
 

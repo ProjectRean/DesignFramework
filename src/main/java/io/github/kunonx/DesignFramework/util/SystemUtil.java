@@ -1,14 +1,24 @@
 package io.github.kunonx.DesignFramework.util;
 
 import com.sun.management.OperatingSystemMXBean;
-import io.github.kunonx.DesignFramework.DesignFramework;
-import org.apache.commons.lang3.SystemUtils;
-
 import java.io.File;
 import java.lang.management.ManagementFactory;
+//import io.github.kunonx.DesignFramework.DesignFramework;
+//import org.apache.commons.lang3.SystemUtils;
 
+/**
+ * Get and control information about your system or manage external libraries.
+ * @deprecated The class is not configured
+ */
 public class SystemUtil
 {
+    //
+    // Unfortunately, this class is not currently in use.
+    // There was still a problem loading the external library module, and JNI related methods are still being studied.
+    // If you have designed the function, the class will be used normally.
+    //
+
+    /*
     private static final String SYSTEM_UTIL_LIBRARY = "DesignFrameworkSystemUtil.dll";
 
     static
@@ -61,8 +71,8 @@ public class SystemUtil
         else
             throw new UnsupportedOperationException();
     }
-
-    public static long getMaxMemory()
+*/
+   public static long getMaxMemory()
     {
         return Runtime.getRuntime().maxMemory();
     }
