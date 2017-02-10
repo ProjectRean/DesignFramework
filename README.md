@@ -56,7 +56,7 @@ Please use the issue tracker in Github, or contact me by email.
 
 # Offical websites
 - DesignFramework website: https://kunonx.com
-- DesignFramework documention: https:/dev.kunonx.com/docs/DesignFramework
+- DesignFramework documention: https://dev.kunonx.com/docs/DesignFramework
 - DesignFramework for Jenkins: https://jenkins.kunonx.com/job/DesignFramework/
 
 # Patch
