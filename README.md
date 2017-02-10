@@ -36,7 +36,7 @@ If you write using character UTF-8:
 If you use the IDE without using it, add the compiled JAR file as an external library.
 In addition to this, you can also use the uploaded source file directly.
 
-# Can I edit and redistribute it?
+# Can I editing and redistributing it?
 DesignFramework is released under the MIT Lisense. According to the license, it can be handled by anyone free of charge.
 However, you must include the copyright notice and this permission mark on all reproductions or important parts.
 In addition, the author or copyright holder is not responsible for the software. Please refer to the license file.
