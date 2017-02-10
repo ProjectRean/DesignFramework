@@ -203,11 +203,10 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
     @Override
     public boolean isNeverEnabled()  { return !this.getDataFolder().exists(); }
 
-    /**
+    /*
      * Register the native library with the plugin.
      * @deprecated The method is not validated for safety
      * @param filename Name of file to register
-     */
     public void registerNativeModule(String filename)
     {
         try
@@ -233,12 +232,12 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
 
         }
     }
+    */
 
-    /**
+    /*
      * Register the native library with the plugin.
      * @deprecated The method is not validated for safety
      * @param filename Names of all files want to register
-     */
     public void registerNativeModule(String... filename)
     {
         for(String name : filename)
@@ -246,7 +245,7 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
             this.registerNativeModule(name);
         }
     }
-
+     */
     @Override
     public void startActivation(Object... objects)
     {

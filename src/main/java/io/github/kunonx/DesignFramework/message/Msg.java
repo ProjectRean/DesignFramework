@@ -4,7 +4,6 @@ import io.github.kunonx.DesignFramework.plugin.DesignFrameworkPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import javax.annotation.Nullable;
 import java.io.File;
 
 public final class Msg
@@ -38,11 +37,11 @@ public final class Msg
         }
     }
 
-    @Nullable private String prefix = null;
+    private String prefix = null;
     public String getPrefix() { return this.prefix; }
     public void setPrefix(String prefix) { this.prefix = prefix; }
 
-    @Nullable  private String suffix = null;
+    private String suffix = null;
     public String getSuffix() {  return this.suffix; }
     public void setSuffix(String suffix) { this.suffix = suffix; }
 
