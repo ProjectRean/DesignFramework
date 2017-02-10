@@ -38,12 +38,5 @@
             <version>1.6</version>
             <scope>provided</scope>
         </dependency>
-        <!--Craftbukkit NMS-->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.11.2-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 </project>
