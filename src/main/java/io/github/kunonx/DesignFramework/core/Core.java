@@ -32,8 +32,13 @@ public abstract class Core implements ClassActivation, Listener, Runnable
     public int getTaskId() { return this.task == null ? -1 : this.task.getTaskId(); }
 
     private DesignFrameworkPlugin plugin = null;
-    public DesignFrameworkPlugin getPlugin() { return this.plugin; }
-    public void setPlugin(DesignFrameworkPlugin plugin) { this.plugin = plugin; }
+    public DesignFrameworkPlugin getActivePlugin() { return this.plugin; }
+    public boolean hasActivePlugin() { return this.plugin != null; }
+    public void setPlugin(DesignFrameworkPlugin plugin)
+    {
+        if(this.hasActivePlugin()) return;
+        this.plugin = plugin;
+    }
 
     @Override
     public void setEnabled(DesignFrameworkPlugin plugin)
@@ -69,7 +74,7 @@ public abstract class Core implements ClassActivation, Listener, Runnable
         if(obj instanceof Core)
         {
             Core core = (Core)obj;
-            return (core.task == this.task) && (core.getPlugin() == this.getPlugin());
+            return (core.task == this.task) && (core.getActivePlugin() == this.getActivePlugin());
         }
         return false;
     }
@@ -91,14 +96,15 @@ public abstract class Core implements ClassActivation, Listener, Runnable
     {
         if(active)
         {
-            if(this.isSync())
-            {
-                this.task = Bukkit.getScheduler().runTaskTimer(this.getPlugin(), this, this.getDelay(), this.getPeriod());
-            }
-            else
-            {
-                this.task = Bukkit.getScheduler().runTaskTimerAsynchronously(this.getPlugin(), this, this.getDelay(), this.getPeriod());
-            }
+            if(this.getActivePlugin().isEnabled())
+                if(this.isSync())
+                {
+                    this.task = Bukkit.getScheduler().runTaskTimer(this.getActivePlugin(), this, this.getDelay(), this.getPeriod());
+                }
+                else
+                {
+                    this.task = Bukkit.getScheduler().runTaskTimerAsynchronously(this.getActivePlugin(), this, this.getDelay(), this.getPeriod());
+                }
         }
         else
         {
@@ -114,7 +120,9 @@ public abstract class Core implements ClassActivation, Listener, Runnable
     {
         if(active)
         {
-            Bukkit.getPluginManager().registerEvents(this, this.plugin);
+            DesignFrameworkPlugin plugin = this.getActivePlugin();
+            if(plugin.isEnabled())
+                    Bukkit.getPluginManager().registerEvents(this, this.getActivePlugin());
         }
         else
         {

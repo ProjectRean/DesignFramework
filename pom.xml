@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.kunonx.DesignFramework</groupId>
     <artifactId>DesignFramework</artifactId>
-    <version>1.1-RELEASED</version>
+    <version>1.2</version>
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -37,6 +37,12 @@
             <artifactId>VaultAPI</artifactId>
             <version>1.6</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.11.2-R0.1-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

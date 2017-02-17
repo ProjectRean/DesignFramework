@@ -3,6 +3,7 @@ package io.github.kunonx.DesignFramework.system;
 import io.github.kunonx.DesignFramework.collection.StringEntry;
 import io.github.kunonx.DesignFramework.message.StringUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class VariableString implements Serializable
      * <b>Key</b> : The string that points to an enumeration<br>
      * <b>Value</b> : The string pointing to the enum in the replacement format<br>
      */
-    private static final transient Map<String, String> defined_map = new HashMap<String, String>();
+    private static final Map<String, String> defined_map = new HashMap<String, String>();
     public static Map<String, String> defines() { return defined_map; }
 
     private static final String format = "<%s>";
@@ -92,7 +93,7 @@ public class VariableString implements Serializable
         for(String s2 : VariableString.defines().values())
         {
             s2 = String.format(VariableString.getFormat(), s2);
-            if(s2.equalsIgnoreCase(str)) return true;
+            if(str.contains(s2)) return true;
         }
         return false;
     }
@@ -154,7 +155,7 @@ public class VariableString implements Serializable
                 {
                     if(o instanceof Player)
                         s = __define_relating_player_replacement(s, (Player)o);
-                    else if(o instanceof World)
+                    if(o instanceof World)
                         s = __define_relating_world_replacement(s, (World)o);
                 }
         }
@@ -189,10 +190,10 @@ public class VariableString implements Serializable
             str = str.replaceAll(getValueFormatted("TIME"), String.valueOf(world.getTime()));
         if(VariableString.contains(str, "USING_PLAYER"))
             str = str.replaceAll(getValueFormatted("USING_PLAYER"), String.valueOf(world.getPlayers().size()));
-        if(VariableString.contains(str, "USUGE"))
+        if(VariableString.contains(str, "USUGE_WORLD"))
         {
             double f = world.getPlayers().size() / (double)Bukkit.getServer().getOnlinePlayers().size() * 100.0;
-            str = str.replaceAll(getValueFormatted("USUGE"), String.valueOf(f));
+            str = str.replaceAll(getValueFormatted("USUGE_WORLD"), String.valueOf(f));
         }
         //TODO
         return str;
