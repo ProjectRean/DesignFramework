@@ -1,5 +1,5 @@
 # DesignFramework
-[![Build Status](https://travis-ci.org/kunonx/DesignFramework.svg?branch=master)](https://travis-ci.org/kunonx/DesignFramework) ![Version](https://img.shields.io/badge/version-1.1--RELEASE-yellowgreen.svg) [![License](https://img.shields.io/badge/LICENSE-MIT-blue.svg)](https://github.com/kunonx/DesignFramework/blob/master/LICENSE) ![Depend](https://img.shields.io/david/strongloop/express.svg)
+[![Build Status](https://travis-ci.org/kunonx/DesignFramework.svg?branch=master)](https://travis-ci.org/kunonx/DesignFramework) ![Version](https://img.shields.io/badge/version-1.2--RELEASE-yellowgreen.svg) [![License](https://img.shields.io/badge/LICENSE-MIT-blue.svg)](https://github.com/kunonx/DesignFramework/blob/master/LICENSE) ![Depend](https://img.shields.io/david/strongloop/express.svg)
 
 DesignFramework is a collection of APIs that help you extend functionality when developing Minecraft plugin.
 Key features currently available include simplified Command registration, custom SendMessage, and custom Entity Generation.
@@ -60,6 +60,10 @@ Please use the issue tracker in Github, or contact me by email.
 - DesignFramework for Jenkins: https://jenkins.kunonx.com/job/DesignFramework/
 
 # Patch
+- v1.2.0
+NMS Package Reflection Added
+Some independent APIs added
+
 - v1.1.0
 Fixed infinite constructor overloading bug
 Fixed Korean(MS949) and Japanese typographical errors in LangConfiguration
