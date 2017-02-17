@@ -3,13 +3,13 @@ package io.github.kunonx.DesignFramework;
 import io.github.kunonx.DesignFramework.message.StringUtil;
 import io.github.kunonx.DesignFramework.plugin.DesignFrameworkPlugin;
 
-public class Permission implements ClassActivation
+public class Permission
 {
-    private String permission;
+    private String permission = null;
     public void setPermission(String arg0) { this.permission = arg0; }
     public String getPermission() { return this.permission; }
 
-    private boolean defaultOp;
+    private boolean defaultOp = true;
     public void setDefault(boolean Op) { this.defaultOp = Op; }
     public boolean isDefaultOp() { return this.defaultOp; }
 
@@ -28,9 +28,9 @@ public class Permission implements ClassActivation
         this.defaultOp = defaultOp;
     }
 
-    protected DesignFrameworkPlugin activePlugin;
+    protected transient DesignFrameworkPlugin activePlugin;
     public DesignFrameworkPlugin getActivePlugin() { return this.activePlugin; }
-
+/*
     @Override
     public void setEnabled(DesignFrameworkPlugin plugin)
     {
@@ -55,6 +55,6 @@ public class Permission implements ClassActivation
     public boolean isEnabled()
     {
         return this.activePlugin != null;
-    }
+    }*/
 }
 

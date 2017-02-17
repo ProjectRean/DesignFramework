@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
 
 public class StringUtil
 {
@@ -113,5 +114,34 @@ public class StringUtil
                 buffer.append(str.charAt(i));
         }
         return buffer.toString();
+    }
+
+    public static boolean isUniqueId(String uuid)
+    {
+        try
+        {
+            UUID.fromString(uuid);
+            return true;
+        }
+        catch(IllegalArgumentException e)
+        {
+            return false;
+        }
+    }
+    public static String decode(String escaped)
+    {
+        if(escaped.indexOf("\\u") == -1) return escaped;
+        String processed = "";
+        int position = escaped.indexOf("\\u");
+        while(position != -1)
+        {
+            if(position != 0) processed += escaped.substring(0 ,position);
+            String token = escaped.substring(position + 2, position + 6);
+            escaped = escaped.substring(position + 6);
+            processed += (char)Integer.parseInt(token, 16);
+            position = escaped.indexOf("\\u");
+        }
+        processed += escaped;
+        return processed;
     }
 }

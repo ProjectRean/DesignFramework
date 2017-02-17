@@ -1,5 +1,6 @@
 {
   "System": {
-    "PLUGIN_LOAD_COMPLETE": "플러그인이 정상적으로 로드되었습니다."
+    "PLUGIN_LOAD_COMPLETE": "플러그인이 정상적으로 로드되었습니다.",
+    "UNKNOWN_COMMAND": "알 수 없는 커맨드입니다. 사용 설명: {0}"
   }
 }

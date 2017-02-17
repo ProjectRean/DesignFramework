@@ -53,6 +53,7 @@ public class CommandRegisterationCore extends Core
         {
             String name = entry.getKey();
             CustomizeCommand<?> target = entry.getValue();
+            target.setEnabled(DesignFramework.getInstance());
 
             Command current = knownCommands.get(name);
             CustomizeCommand<?> commandTarget = getCustomizeCommand(current);

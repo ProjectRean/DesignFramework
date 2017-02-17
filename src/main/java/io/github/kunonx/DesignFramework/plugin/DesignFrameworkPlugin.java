@@ -13,9 +13,9 @@ import io.github.kunonx.DesignFramework.message.StringUtil;
 import io.github.kunonx.DesignFramework.plugin.config.LangConfiguration;
 import io.github.kunonx.DesignFramework.plugin.config.SyncYamlConfiguration;
 import io.github.kunonx.DesignFramework.util.ReflectionUtil;
-import io.github.kunonx.DesignFramework.util.SystemUtil;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,7 +30,7 @@ import java.io.File;
  * @author Kunonx
  * @see PluginAccessor
  */
-public abstract class DesignFrameworkPlugin extends JavaPlugin implements PluginAccessor
+public abstract class DesignFrameworkPlugin extends JavaPlugin implements PluginAccessor, Listener
 {
     private long SystemEnabledMillis;
 
@@ -90,25 +90,28 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
         this.prefix = new Prefix(StringUtil.getColorHash(this.getDescription().getName()) + "[" + this.getDescription().getName() + "] ");
         this.msg = new Msg(this.prefix);
 
+        if (this.isNeverEnabled())
+        {
+            this.onEnableInitializing();
+        }
         lang = new LangConfiguration().load(this);
         yaml = SyncYamlConfiguration.initLoad(this);
 
         this.getPluginMsg().sendToConsole("&b" + this.getDescription().getName() + " v" + this.getDescription().getVersion() + " started by DesignFrameworkPlugin Accessor");
         try
         {
+            Bukkit.getPluginManager().registerEvents(this, this);
             this.getPluginMsg().sendToConsole("&aCalling initial activation method...");
             this.preLoad();
             synchronized (this)
             {
                 // Call method when the plugin is never used or first enabling
-                if (this.isNeverEnabled())
-                    this.onEnableInitializing();
                 DesignFrameworkPluginEnableEvent event = new DesignFrameworkPluginEnableEvent(this);
                 event.run();
                 this.getPluginMsg().sendToConsole("&aCalling customize activation method of enabling inner...");
 
                 // The method call overridden in the parent class
-                event.getPlugin().onEnableInner();
+                this.onEnableInner();
             }
             this.finLoad();
             this.getPluginMsg().sendToConsole("&f" + this.getDescription().getName() + " v" + this.getDescription().getVersion() + " was &eenabled successfully. &7(" +
@@ -134,7 +137,7 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
                 this.getPluginMsg().sendToConsole("&aCalling customize activation method of disabling inner...");
 
                 // The method call overridden in the parent class
-                event.getPlugin().onDisableInner();
+                this.onDisableInner();
             }
             this.getPluginMsg().sendToConsole("&f" + this.getDescription().getName() + " v" + this.getDescription().getVersion() + " was &edisabled successfully. &7(" +
                     String.valueOf(System.currentTimeMillis() - this.getPluginDisabledMills()) + "ms)");
@@ -249,9 +252,9 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
     @Override
     public void startActivation(Object... objects)
     {
-        int i = 0;
-        for(Object o : objects)
-        {
+            int i = 0;
+            for(Object o : objects)
+            {
             if(o instanceof ClassActivation)
             {
                 ClassActivation ca = (ClassActivation)o;
@@ -275,7 +278,7 @@ public abstract class DesignFrameworkPlugin extends JavaPlugin implements Plugin
         }
         if(i != 0)
             this.getPluginMsg().sendToConsole("&e{0} Command classes has been registered", i);
-        this.getPluginMsg().sendToConsole("&eRegistered class activation " + objects.length + " core(s)");
+        this.getPluginMsg().sendToConsole("&aRegistered class activation " + objects.length + " core(s)");
     }
 
     @Override
