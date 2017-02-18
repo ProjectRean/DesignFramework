@@ -192,7 +192,7 @@ public class VariableString implements Serializable
             str = str.replaceAll(getValueFormatted("USING_PLAYER"), String.valueOf(world.getPlayers().size()));
         if(VariableString.contains(str, "USUGE_WORLD"))
         {
-            double f = world.getPlayers().size() / (double)Bukkit.getServer().getOnlinePlayers().size() * 100.0;
+            double f = world.getPlayers().size() / (double)((Bukkit.getServer().getOnlinePlayers().size() * 100d) / 100d);
             str = str.replaceAll(getValueFormatted("USUGE_WORLD"), String.valueOf(f));
         }
         //TODO

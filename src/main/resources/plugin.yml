@@ -2,4 +2,5 @@ name: DesignFramework
 version: 1.2
 main: io.github.kunonx.DesignFramework.DesignFramework
 author: [Kunonx]
+soft-depend: [TitleManager]
 description: Overall Feature Extension API Collection
