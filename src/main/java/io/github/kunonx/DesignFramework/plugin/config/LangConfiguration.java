@@ -61,8 +61,8 @@ public class LangConfiguration extends SyncConfigFileReader
         File original_file = new File(plugin.getDataFolder(), locale + "_lang.json");
         try
         {
-        	System.out.println(original_file.getName());
-        	System.out.println(original_file.exists());
+        	//System.out.println(original_file.getName());
+        	//System.out.println(original_file.exists());
             if (!original_file.exists())
             {
                 original_file.createNewFile();
