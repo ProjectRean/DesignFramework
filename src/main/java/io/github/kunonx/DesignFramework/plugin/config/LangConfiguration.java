@@ -10,7 +10,13 @@ import io.github.kunonx.DesignFramework.plugin.DesignFrameworkPlugin;
 
 import org.bukkit.command.CommandSender;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
 import java.util.List;
@@ -55,40 +61,41 @@ public class LangConfiguration extends SyncConfigFileReader
         File original_file = new File(plugin.getDataFolder(), locale + "_lang.json");
         try
         {
-            if (!file.exists())
+        	System.out.println(original_file.getName());
+        	System.out.println(original_file.exists());
+            if (!original_file.exists())
             {
                 original_file.createNewFile();
+	            synchronized (file)
+	            {
+	                Msg.console(plugin, "&aUsing locale: &f" + locale);
+	                try
+	                {
+	                    plugin.saveResource(locale + "_lang.json", true);
+	                }
+	                catch (IllegalArgumentException e)
+	                {
+	                    Msg.console(plugin, "&fThe language (" + locale + ") file not found in JARs, you want to customize it? Support this plugin developer.");
+	                    return load("ko", plugin);
+	                }
+	            }
+	            FileInputStream inputStream = new FileInputStream(original_file.getAbsolutePath());
+	            FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
+	
+	            FileChannel fcin = inputStream.getChannel();
+	            FileChannel fcout = outputStream.getChannel();
+	
+	            long size = fcin.size();
+	            fcin.transferTo(0, size, fcout);
+	
+	            fcout.close();
+	            fcin.close();
+	
+	            outputStream.close();
+	            inputStream.close();
+	
+	            original_file.delete();
             }
-            synchronized (file)
-            {
-                Msg.console(plugin, "&aUsing locale: &f" + locale);
-                try
-                {
-                    plugin.saveResource(locale + "_lang.json", true);
-                }
-                catch (IllegalArgumentException e)
-                {
-                    Msg.console(plugin, "&fThe language (" + locale + ") file not found in JARs, you want to customize it? Support this plugin developer.");
-                    return load("ko", plugin);
-                }
-            }
-                FileInputStream inputStream = new FileInputStream(original_file.getAbsolutePath());
-                FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
-
-                FileChannel fcin = inputStream.getChannel();
-                FileChannel fcout = outputStream.getChannel();
-
-                long size = fcin.size();
-                fcin.transferTo(0, size, fcout);
-
-                fcout.close();
-                fcin.close();
-
-                outputStream.close();
-                inputStream.close();
-
-                original_file.delete();
-
         }
         catch(IOException e)
         {
