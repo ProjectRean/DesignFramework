@@ -22,8 +22,7 @@ Delete &lt;repositories&gt;, &lt;dependencies&gt; unless you haven't other packa
         <dependency>
             <groupId>io.github.kunonx</groupId>
             <artifactId>DesignFramework</artifactId>
-            <version>1.1</version>
-            <classifier>RELEASED</classifier>
+            <version>1.2</version>
         </dependency>
     </dependencies>
     
